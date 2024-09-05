@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block content %}
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+      <div class="container-fluid py-1 px-3">
+
+
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+          <ul class="navbar-nav  justify-content-start">
+            <li class="nav-item d-flex align-items-center">
+              <a class="btn btn-outline-warning btn-sm mb-0 me-3" href="{% url 'plat:add' %}">Ajouter un plat</a>
+            </li>
+          </ul>
+          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+            <form method="GET">
+            <div class="input-group input-group-outline">
+              <label class="form-label">Recherche par nom</label>
+              <input type="text" id="" name="rech" value="{{rech_plat}}" placeholder="Recherche" class="form-control">
+            </div>
+          </div>
+          <ul class="navbar-nav  justify-content-end">
+            <li class="nav-item d-flex align-items-center">
+              <button onclick="" class="btn btn-outline-primary btn-sm mb-0 me-3">Recherche</button>
+            </li>
+          </ul>
+        </form>
+        </div>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12">
+          <div class="card my-4">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+              <div class="bg-gradient-warning shadow-primary border-radius-lg pt-4 pb-3">
+                <h6 class="text-white text-capitalize ps-3">Liste des plats {{plat_count}}</h6>
+              </div>
+            </div>
+            <div class="card-body px-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Libelle</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 align-items-center"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for plat in plats %}
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm">{{plat.name}}</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle text-center text-sm">
+                        <a href="{% url 'plat:update-plat' plat.id %}" class="badge badge-sm bg-gradient-success">Modifier</a>
+                        <a href="{% url 'plat:delete-plat' plat.id %}" class="badge badge-sm bg-gradient-danger">Supprimer</a>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+{% endblock content %}
